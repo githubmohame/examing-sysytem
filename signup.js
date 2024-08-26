@@ -10,8 +10,8 @@ class SingUpPage{
 class SingUpPage1 extends SingUpPage{
     constructor(max_circle,labelNum){
         super();
-        self.max_circle = max_circle;
-        self.labelNum = labelNum;
+        this.max_circle = max_circle;
+        this.labelNum = labelNum;
         let outer_circleStr="outer-circle"
         let lineStr="line";
         let circle_stepStr="circle-step";
@@ -41,15 +41,21 @@ class SingUpPage1 extends SingUpPage{
             line.classList.add("line");
             line.classList.add("line-gray");
         }
+        let getInfoKey=["first-name","last-name"];
         for(let i=0;i<labelNum;i++){
            let label=document.getElementById(`${labelStr}${i+1}`); 
            let input=document.getElementById(`${inputStr}${i+1}`);
            label.style.display="inline-block";
            input.style.display="inline-block";
+           let str1=sessionStorage.getItem(getInfoKey[i]);
+           if(str1){
+            input.value=str1;
+           }
            label.innerText=u[i];
         }
     }
     validate(){
+      let  inputStr="input-form";
       let inputform1=document.getElementById("input-form1");
       let inputform2=document.getElementById("input-form2");
       let reg=new RegExp("^[a-zA-Z]+$");
@@ -76,11 +82,26 @@ class SingUpPage1 extends SingUpPage{
       else{
         b2=true;
       }
+      if(b1&&b2){
+        sessionStorage.setItem("first-name",inputform1.value);
+        sessionStorage.setItem("last-name",inputform2.value);
+        let ind=1;
+        while(document.getElementById(`error-input${ind}`)!=undefined){
+            let error=document.getElementById(`error-input${ind}`);
+            error.innerHTML="";
+            ind++;
+        }
+        for(let i=0;i<this.labelNum;i++){
+            let input=document.getElementById(`${inputStr}${i+1}`);        
+            input.value="";
+         }
+         
+      }
       return b1 &&b2;
     }
      updateNext(){
         if(this.validate()){
-            return new SingUpPage2(self.max_circle,self.labelNum);
+            return new SingUpPage2(this.max_circle,this.labelNum);
         }
     }
 }
@@ -97,21 +118,30 @@ class SingUpPage2 extends SingUpPage{
        fr.addEventListener("load", ()=>{
         const url=fr.result;
         console.log(url);
+        sessionStorage.setItem("file", url);
+        sessionStorage.setItem("file-name",file.files[0].name);
        });
         });
     }
     constructor(max_circle,labelNum){
         super();
+        this.max_circle=max_circle;
+        this.labelNum=labelNum;
         let outer_circleStr="outer-circle"
         let lineStr="line";
         let circle_stepStr="circle-step";
         let labelStr="label"
-        let u=["first name", "last name"];
+        let u=["email", "last name"];
         let pick_pict=document.getElementById("pick-picture-part");
         pick_pict.innerHTML=`<input type="file" style="visibility: hidden;height: 0;width: 0;"  id="file">
                             <input type="button" value="Pick Picture" class="pick-picture" onclick="SingUpPage2.pickImage()">
                             <span id="picture-label"></span>`;
         let inputStr="input-form";
+        let file_name=sessionStorage.getItem("file-name");
+        if(file_name){
+            let label=document.getElementById("picture-label");
+            label.innerHTML=file_name;
+        }
         let prev=document.getElementById("previousbutton");
         prev.style.visibility="visible";
         for(let i=1;i<=max_circle;i++){
@@ -148,6 +178,8 @@ class SingUpPage2 extends SingUpPage{
                 line.classList.add("line-gray");
             }
         }
+        console.log(`${labelNum} ttttt`);
+        let getInfoKey=["email",""];
         for(let i=0;i<labelNum;i++){
             if(i==0){
             let label=document.getElementById(`${labelStr}${i+1}`); 
@@ -155,6 +187,10 @@ class SingUpPage2 extends SingUpPage{
            label.style.visibility="visible";
            input.style.visibility="visible";
            label.innerText=u[i];
+            let email_store=sessionStorage.getItem("email");
+            if(email_store){
+                input.value=(email_store);
+            }
             }
             else{
                 console.log("jjjjjjjjjj");
@@ -170,6 +206,7 @@ class SingUpPage2 extends SingUpPage{
         }
     }
     validate(){
+        let inputStr="input-form";
        let email=document.getElementById("input-form1");
        console.log(email.value);
        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -183,8 +220,20 @@ class SingUpPage2 extends SingUpPage{
          error1.innerHTML=`&#9888;this field should be in email format`;
        }
        else{
-        //console.log("kkkktttttttttttttttttttttttttttttttt");
+        sessionStorage.setItem("email", email.value);
         b1=true;
+       }
+       if(b1){
+        let ind=1;
+        while(document.getElementById(`error-input${ind}`)!=undefined){
+            let error=document.getElementById(`error-input${ind}`);
+            error.innerHTML="";
+            ind++;
+        }
+        for(let i=0;i<this.labelNum;i++){
+            let input=document.getElementById(`${inputStr}${i+1}`);        
+            input.value="";
+         }
        }
        return b1;
     }
@@ -200,8 +249,8 @@ class SingUpPage2 extends SingUpPage{
 class SingUpPage3 extends SingUpPage{
     constructor(max_circle,labelNum){
         super();
-        self.max_circle = max_circle;
-        self.labelNum = labelNum;
+        this.max_circle = max_circle;
+        this.labelNum = labelNum;
         let outer_circleStr="outer-circle"
         let lineStr="line";
         let circle_stepStr="circle-step";
@@ -210,8 +259,7 @@ class SingUpPage3 extends SingUpPage{
         let pick_pict=document.getElementById("pick-picture-part");
         pick_pict.innerHTML="";
         let inputStr="input-form";
-        let prev=document.getElementById("previousbutton");
-        prev.style.visibility="hidden";
+       
         for(let i=1;i<=max_circle;i++){
             console.log(`${circle_stepStr}${i}`);
             
@@ -247,6 +295,25 @@ class SingUpPage3 extends SingUpPage{
            let input=document.getElementById(`${inputStr}${i+1}`);
            label.style.display="inline-block";
            input.style.display="inline-block";
+           if(i==1){
+            console.log("juuyyyffr");
+            
+            input.addEventListener("input",()=>{
+                //console.log("juuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+                let input1=document.getElementById("input-form1");
+                let input2=document.getElementById("input-form2");
+                if(input1.value==input2.value){
+                    let btn1=document.getElementById("next-btn");
+                    btn1.style.backgroundColor="green"
+                }
+                else{
+                    console.log("hhhh");
+                    
+                     let btn1=document.getElementById("next-btn");
+                    btn1.style.backgroundColor="#939aad"
+                }
+           })
+           }
            label.innerText=u[i];
         }
     }
@@ -255,6 +322,9 @@ class SingUpPage3 extends SingUpPage{
     }
     updateNext(){
         this.validate();
+    }
+    updatePrev(){
+        return new SingUpPage2(this.max_circle,this.labelNum);
     }
 }
 //let s1=SingUpPage();
