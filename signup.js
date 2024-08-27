@@ -304,13 +304,15 @@ class SingUpPage3 extends SingUpPage{
                 let input2=document.getElementById("input-form2");
                 if(input1.value==input2.value){
                     let btn1=document.getElementById("next-btn");
-                    btn1.style.backgroundColor="green"
+                    btn1.classList.remove("button-next");
+                    btn1.classList.add("button-next-green");
                 }
                 else{
                     console.log("hhhh");
                     
                      let btn1=document.getElementById("next-btn");
-                    btn1.style.backgroundColor="#939aad"
+                     btn1.classList.remove("button-next-green");
+                    btn1.classList.add("button-next");
                 }
            })
            }

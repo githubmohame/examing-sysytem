@@ -1,4 +1,15 @@
 from question import Question
+def extract_code(str1):
+    pass
+    try:
+        val1=str1.index("<script");
+        val2=str1.index("</script>");
+        if(val1==1 and val2!=-1):
+            return [str1[:val1]+str1[val2+len("</script>"):],str1[val1:val2+len("</script>"):]]
+            
+    except:
+        pass
+    return [str1,""]
 def mainfunction1( list1:Question):
     with open('question.txt', 'r') as file:
         data = file.read().rstrip()
@@ -52,4 +63,8 @@ def mainfunction1( list1:Question):
             list1[index_ques].answer=data[i];
             index_ques+=1;
         i+=1
+    for i in range(len(list1)):
+        val1=extract_code(list1[i].question);
+        [list1[i].question,list1[i].code]=val1;
+    
     

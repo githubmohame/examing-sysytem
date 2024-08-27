@@ -35,7 +35,11 @@ html,body{
     border-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-.rigt-part-form{
+.form{
+    display: flex;
+    flex-direction: row;
+}
+.right-part-form{
     background-color: #383e46;
     width: 50%;
     height: 100%;
@@ -48,6 +52,11 @@ html,body{
     color: white;
     padding: 20px;
     box-sizing: border-box;
+    animation-fill-mode:forwards;
+    animation-timing-function:linear;
+    animation-direction:normal;
+    animation-name:swap;
+    
 }
 .farm-content{
     width: 50%;
@@ -133,6 +142,7 @@ html,body{
     align-self:stretch;
     padding-left: 10%;
     padding-right: 10%;
+    order: 1;
 }
 .label-form{
     display: block;
@@ -169,10 +179,18 @@ outline: none;
     font-size: 18px;
     border: none;
 }
-.button-next:hover{
+.button-next:hover,.button-next-green:hover{
     background-color:#383e46 ;
 }
-
+.button-next-green{
+    color: white;
+    font-size: 18px;
+    border: none;
+    background-color:green ;
+    width: 160px;
+    height: 40px;
+    border-radius:50px ;
+}
 .h1-style{
     font-size: 30px;
     color: white;
@@ -212,3 +230,8 @@ outline: none;
     margin: 0;
     padding: 0;
 }
+
+@keyframes swap {
+    from {order: 2;}
+    to {order: 1;}
+  }
