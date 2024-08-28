@@ -1,2 +1,4 @@
 &#10004; check
 &#9888; traingle error;
+&#x1F464; person
+&#x1F512; lock;

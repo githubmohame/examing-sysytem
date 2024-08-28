@@ -4,40 +4,75 @@ html,body{
    height: 100%;
 }
 .container{
+    padding: 1%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: stretch;
-    align-content: stretch;
-    height: 100%;
+    justify-content: center;
+    height: 120%;
+    align-content:center;
+    align-items: center;
     flex-wrap: wrap;
 }
 .left-part{
     display: flex;
-    align-self: stretch;
-    flex: 1;
+    flex: 5;
     height: 100%;
     justify-content: center;
     align-content: center;
     align-items: center;
-    width: 500px;
+    width: 50%;
+    flex-wrap: wrap;
 
     }
-.location-image{
+.left-part-start-assement{
     display: flex;
+    flex: 5;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
     align-content: center;
     align-items: center;
+    width: 50%;
+    flex-wrap: wrap;
+   
+}
+.location-image{
+    display: flex;
+    flex: 3;
+    align-content: stretch;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .signup-form{   
-    height:600px;
-    width: 800px;
+    height:400px;
     display: flex;
-    box-shadow: -30px 0px 50px #d5d5d5;
+    box-shadow: 0px 3px 50px rgb(117, 117, 130),
+    -30px 3px 50px rgb(117, 117, 130);
+    margin-top: 10%;
     border-radius: 20px;
     border-bottom-right-radius: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 1%;
+    width: 600px;
+    box-sizing: border-box;
+
+
+}
+.center-parg-start-assement{
+    height:500px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 1%;
+    width: 700px;
+    justify-content: center;
+    align-content: center;
 }
 .form{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 .right-part-form{
     background-color: #383e46;
@@ -52,19 +87,36 @@ html,body{
     color: white;
     padding: 20px;
     box-sizing: border-box;
-    animation-fill-mode:forwards;
-    animation-timing-function:linear;
-    animation-direction:normal;
-    animation-name:swap;
+    position: relative;
+    left:9%;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    gap: 0;
     
 }
-.farm-content{
-    width: 50%;
-    margin:3%;
+.form-content{
+    width: 46%;
     display: flex;
     flex-direction: column;
-    gap: 19%;
+    position: relative;
+    left:0%;
+    margin-left: 10px;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    
    
+}
+.form-content-animation{
+    animation-name: swapFormContent;
+}
+.right-part-form-animation{
+    border-top-right-radius:0;
+    border-bottom-right-radius:0px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    animation-name: swapRightPartForm;
 }
 .circle-step{
     height: 30px;
@@ -142,7 +194,6 @@ html,body{
     align-self:stretch;
     padding-left: 10%;
     padding-right: 10%;
-    order: 1;
 }
 .label-form{
     display: block;
@@ -150,6 +201,14 @@ html,body{
     color: gray;
     font-size: 20px;
 
+}
+.label-form-login{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: transparent;
+    text-shadow:0 0 0 black ;
+    font-size: 20px;
 }
 .input-form{
 width: 100%;
@@ -182,6 +241,18 @@ outline: none;
 .button-next:hover,.button-next-green:hover{
     background-color:#383e46 ;
 }
+.btn-start-assessment{
+    color: white;
+    font-size: 18px;
+    border: none;
+    background-color:gray ;
+    width: 160px;
+    height: 70px;
+    border-radius:10px;
+    text-align: center;
+    font-size: 30;
+    font-weight: bold;
+}
 .button-next-green{
     color: white;
     font-size: 18px;
@@ -194,6 +265,11 @@ outline: none;
 .h1-style{
     font-size: 30px;
     color: white;
+}
+.h1-style-black{
+    font-size: 40px;
+    font-weight: 500;
+    color: black;
 }
 .center-submit-hide{
     visibility: hidden;
@@ -231,7 +307,15 @@ outline: none;
     padding: 0;
 }
 
-@keyframes swap {
-    from {order: 2;}
-    to {order: 1;}
+@keyframes swapRightPartForm{
+    from { 
+        left:9%;}
+    to {left: -50%;}
   }
+
+  @keyframes swapFormContent{
+    from { 
+        left:0%;}
+    to {left: 50%;}
+  }
+
